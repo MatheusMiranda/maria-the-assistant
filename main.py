@@ -1,13 +1,13 @@
 import speech_recognition as sr
-from background_listener import KeywordBackgroundListener
+from listener import Listener, BackgroundListener
 from functools import partial
 
 import signal
 
 
 def main():
-    bl = KeywordBackgroundListener()
-    bl.start()
+    l = Listener(BackgroundListener())
+    l.start()
 
 if __name__ == "__main__":
     main()

@@ -51,17 +51,14 @@ class ListenerState(ABC):
 class GenericListener(ListenerState):
 
     def start(self, mic, recognizer):
-        with mic as source:
-            recognizer.adjust_for_ambient_noise(source)
+        print("Qual o seu desejo?")
+        audio = recognizer.listen(mic)
 
-            print("Qual o seu desejo?")
-            audio = recognizer.listen(source)
-
-            try:
-                speech_text = microfone.recognize_google(audio, language='pt-BR')
-                print("Você disse: " + speech_text)
-            except sr.UnkownValueError:
-                print("Foi mal! Eu não entendi o que você disse!")
+        try:
+            speech_text = recognizer.recognize_google(audio, language='pt-BR')
+            print("Você disse: " + speech_text)
+        except sr.UnkownValueError:
+            print("Foi mal! Eu não entendi o que você disse!")
 
     def stop(self):
         self.context.transition_to(BackgroundListener())

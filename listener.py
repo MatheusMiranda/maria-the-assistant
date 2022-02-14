@@ -60,6 +60,8 @@ class GenericListener(ListenerState):
         except sr.UnkownValueError:
             print("Foi mal! Eu não entendi o que você disse!")
 
+        self.context.transition_to(BackgroundListener())
+
     def stop(self):
         self.context.transition_to(BackgroundListener())
 
